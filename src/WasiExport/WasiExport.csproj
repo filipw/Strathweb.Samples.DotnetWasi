@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <RuntimeIdentifier>wasi-wasm</RuntimeIdentifier>
+        <OutputType>Exe</OutputType>
+        <PublishTrimmed>true</PublishTrimmed>
+        <WasmSingleFileBundle>true</WasmSingleFileBundle>
+        <EventSourceSupport>false</EventSourceSupport>
+        <UseSystemResourceKeys>true</UseSystemResourceKeys>
+        <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+        <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+        <DebuggerSupport>false</DebuggerSupport>
+        <WasmEmitSymbolMap>true</WasmEmitSymbolMap>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <_WasiFilePathForFixup Include="interop.c" />
+    </ItemGroup>
+
+</Project>

@@ -11,9 +11,9 @@
 4. Install the preferred WASM runtime/CLI runner. The recommended one is [wasmtime](https://wasmtime.dev)
 5. **(optional)** Download [binaryen](https://github.com/WebAssembly/binaryen/releases), extract and the extracted `bin` folder to the `PATH`. This allows using `wasm-opt` 
 
-## Hello world
+## [Hello world](src/WasiDemo)
 
-Basic demo of .NET 8 application compiled for `wasm-wasi`.  Steps to build:
+Basic demo of .NET 8 console application compiled for `wasm-wasi`.  Steps to build:
 
 ```shell
 cd src/WasiDemo
@@ -25,7 +25,7 @@ Note that we run the `publish` workflow instead of a normal `build`, instead of 
 This can now be run:
 
 ```shell
-wasmtime bin/Release/net8.0/wasi-wasm/publish/AppBundle/WasiDemo.wasm
+wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemo.wasm
 ```
 
 And it should print:
@@ -37,9 +37,25 @@ I'm alive in C#!
 Alternatively, it's possible to further optimize the WASM file by first running `wasm-opt`:
 
 ```shell
-wasm-opt -Oz --enable-bulk-memory bin/Release/net8.0/wasi-wasm/publish/AppBundle/WasiDemo.wasm -o bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemoOpt.wasm
-wasmtime bin/Release/net8.0/wasi-wasm/publish/AppBundle/WasiDemoOpt.wasm
+wasm-opt -Oz --enable-bulk-memory bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemo.wasm -o bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemoOpt.wasm
+wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemoOpt.wasm
 ```
 
 The result should be a smaller WASM file.
 
+## [Exporting a WASM function](src/WasiExport)
+
+Example of surfacing a .NET method as WASM function. Steps to build:
+
+```shell
+cd src/WasiExport
+dotnet publish -c Release
+```
+
+Instead of going through the WASM entrypoint (the `_start()` function, which points to `Main()` in C#)
+
+```shell
+wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemo.wasm --invoke hello
+```
+
+The same optimizations as before can be done on this project too.

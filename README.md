@@ -45,17 +45,20 @@ The result should be a smaller WASM file.
 
 ## [Exporting a WASM function](src/WasiExport)
 
-Example of surfacing a .NET method as WASM function. Steps to build:
+Example of surfacing a .NET method as a WASM function. Steps to build:
 
 ```shell
 cd src/WasiExport
 dotnet publish -c Release
 ```
 
-Instead of going through the WASM entrypoint (the `_start()` function, which points to `Main()` in C#)
+Instead of going through the WASM entrypoint (the `_start()` function, which points to `Main()` in C#).
 
 ```shell
 wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemo.wasm --invoke hello
 ```
+
+Note that a C# `Main` method is still needed (even if empty) because it will boot the Mono runtime, and it will be internally called prior to our function execution.
+However, this is needed only once - and is tracked by a static state - so if we load the produced WASM file into another process, and continuously call our function, `Main` would only be called once on first invocation of our function.
 
 The same optimizations as before can be done on this project too.

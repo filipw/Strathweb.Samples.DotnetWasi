@@ -3,8 +3,6 @@
 #include <mono/metadata/object.h>
 #include <mono/metadata/exception.h>
 
-extern void mono_wasm_invoke_method_ref(MonoMethod *method, MonoObject **this_arg_in, void *params[], MonoObject **_out_exc, MonoObject **out_result);
-
 MonoObject* invoke_hello(MonoObject* target_instance, void* method_params[]) {
     static MonoMethod* method_hello = NULL;
 
@@ -14,9 +12,7 @@ MonoObject* invoke_hello(MonoObject* target_instance, void* method_params[]) {
     }
 
     MonoObject* exception = NULL;
-    MonoObject* res = NULL;
-
-    mono_wasm_invoke_method_ref(method_hello, &target_instance, method_params, &exception, &res);
+    MonoObject* res = mono_runtime_invoke(method_hello, target_instance, method_params, &exception);
     assert(!exception);
 
     return res;

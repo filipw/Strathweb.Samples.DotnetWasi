@@ -1,7 +1,7 @@
 using System;
 namespace WasiExport;
 
-public class Interop
+public class Program
 {
     public static void Hello()
     {

@@ -55,7 +55,7 @@ dotnet publish -c Release
 Instead of going through the WASM entrypoint (the `_start()` function, which points to `Main()` in C#).
 
 ```shell
-wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiDemo.wasm --invoke hello
+wasmtime bin/Release/net8.0/wasi-wasm/AppBundle/WasiExport.wasm --invoke hello
 ```
 
 Note that a C# `Main` method is still needed (even if empty) because it will boot the Mono runtime, and it will be internally called prior to our function execution.

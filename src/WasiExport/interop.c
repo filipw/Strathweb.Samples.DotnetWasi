@@ -9,7 +9,7 @@ MonoObject* invoke_hello(MonoObject* target_instance, void* method_params[]) {
     static MonoMethod* method_hello = NULL;
 
     if (!method_hello) {
-        method_hello = lookup_dotnet_method("WasiExport.dll", "WasiExport", "Interop", "Hello", -1);
+        method_hello = lookup_dotnet_method("WasiExport.dll", "WasiExport", "Program", "Hello", -1);
         assert(method_hello);
     }
 

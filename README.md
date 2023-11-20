@@ -1,5 +1,7 @@
 # Strathweb.Samples.DotnetWasi
 
+📚 Blog post [available here](https://www.strathweb.com/2023/09/dotnet-wasi-applications-in-net-8-0/)
+
 ## Prerequisites
 
 1. Install [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) (currently RC1 is the latest)
